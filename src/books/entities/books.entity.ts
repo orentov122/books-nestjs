@@ -8,6 +8,9 @@ export class Books {
   @Column({ length: 100, unique: true })
   name!: string;
 
+  @Column()
+  text!: string;
+  
   @Column({ length: 100 })
   description!: string;
 

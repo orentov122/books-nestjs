@@ -13,7 +13,7 @@ import { BooksModule } from './books/books.module';
       port: 5432,
       username: 'postgres',
       password: 'password',
-      database: 'practic',
+      database: 'books_db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),

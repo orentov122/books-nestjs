@@ -13,9 +13,26 @@ export class BooksService {
   ) {}
 
   async create(dto: CreateBookDto): Promise<Books> {
-    const book = this.booksRepository.create(dto);
-    return this.booksRepository.save(book);
+  const exists = await this.booksRepository.findOne({
+    where: { name: dto.name }
+  })
+ const desc = await this.booksRepository.findOne({
+    where: { description: dto.description }
+  })
+  if (exists) {
+    throw new Error("Book already exists")
   }
+  if (desc) {
+    throw new Error("Desc already exists")
+  }
+
+if (!dto.name) throw new Error("Name required")
+if (!dto.description) throw new Error("Description required")
+if (!dto.author) throw new Error("Author required")
+  
+  const book = this.booksRepository.create(dto)
+  return this.booksRepository.save(book)
+}
 
   async findAll(): Promise<Books[]> {
     return this.booksRepository.find();
